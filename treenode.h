@@ -15,6 +15,56 @@ using std::pair;
 
 // TODO your code for the TreeNode class goes here:
 
+template<typename T>
+class TreeNode{
+	
+public:
+	T data;
+	unique_ptr<TreeNode<T>> leftChild;
+	unique_ptr<TreeNode<T>> rightChild;
+	TreeNode<T> * parent;
+	
+	TreeNode(T dataIn)
+		:data(dataIn),parent(nullptr){
+	}
+
+	void setLeftChild(TreeNode *child){
+	
+		leftChild.reset(child);
+		leftChild->parent=this;
+		
+	}
+	
+	void setRightChild(TreeNode *child){
+	
+		rightChild.reset(child);
+		rightChild->parent=this;
+		
+	}
+	
+	const ostream & write(ostream & o){
+	
+		if(leftChild){
+		
+			//o<<"HIT"<<endl;
+			leftChild->write(o);
+		
+		}	
+		
+		o<<" "<<data<<" ";
+		
+		if(rightChild){
+			
+			rightChild->write(o);
+			
+		}
+		
+		return o;
+		
+	}
+	
+};
+
 // do not edit below this line
 
 #endif
